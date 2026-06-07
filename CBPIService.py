@@ -23,16 +23,18 @@ class CBPIService:
     def get_kettle(self, name):
         return self.kettles.get(name)
 
-    def get_sensor_value(self, sensor_id):
-        """Fetch current value for a specific sensor."""
-        if not sensor_id:
-            return None
+    def get_active_step(self):
+        """Fetch the active brew step."""
         try:
-            resp = requests.get(f"{self.base_url}/sensor/{sensor_id}", timeout=2)
+            resp = requests.get(f"{self.base_url}/step2/", timeout=2)
             if resp.status_code == 200:
-                return resp.json().get('value')
+                steps = resp.json()
+                # Find step with status "A"
+                for step in steps:
+                    if step.get('status') == 'A':
+                        return step
             return None
         except Exception as e:
-            logging.error(f"Error fetching sensor {sensor_id}: {e}")
+            logging.error(f"Error fetching active step: {e}")
             return None
 

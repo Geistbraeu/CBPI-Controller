@@ -32,17 +32,24 @@ def main():
             time.sleep(1 + error_counter)
             continue
         
-        # 2. Get Data
+        # 2. Check active step
+        active_step = cbpi.get_active_step()
+        if active_step and active_step.get('type') == 'BoilStep':
+            oled.clear_all()
+            time.sleep(5) # Wait before next check during boil
+            continue
+
+        # 3. Get Data
         mt_kettle = cbpi.get_kettle("MT")
         hlt_kettle = cbpi.get_kettle("HLT")
         
         mt_temp = cbpi.get_sensor_value(mt_kettle.get('sensor')) if mt_kettle else None
         hlt_temp = cbpi.get_sensor_value(hlt_kettle.get('sensor')) if hlt_kettle else None
         
-        # 3. Process & Draw
+        # 4. Process & Draw
         success = True
         
-        # HLT Temp (from sensor) -> OLED 0
+        # HLT Temp -> OLED 0
         if hlt_temp is not None:
             if not oled.draw_text(0, f"{round(float(hlt_temp),1)}°C"): success = False
         else:
@@ -55,7 +62,7 @@ def main():
         else:
             if not oled.draw_text(1, "Err"): success = False
 
-        # MT Temp (from sensor) -> OLED 2
+        # MT Temp -> OLED 2
         if mt_temp is not None:
             if not oled.draw_text(2, f"{round(float(mt_temp),1)}°C"): success = False
         else:
