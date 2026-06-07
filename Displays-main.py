@@ -33,10 +33,19 @@ def main():
             continue
         
         # 2. Check active step
-        active_step = cbpi.get_active_step()
+        all_data = cbpi.get_all_steps()
+        steps = all_data.get('steps', []) if isinstance(all_data, dict) else []
+        
+        active_step = next((s for s in steps if s.get('status') == 'A'), None)
+        all_done = all(s.get('status') == 'D' for s in steps) if steps else False
+        
         if active_step and active_step.get('type') == 'BoilStep':
+            for i in range(4): oled.draw_text(i, "Boil")
+            time.sleep(5)
+            continue
+        elif not active_step and all_done:
             oled.clear_all()
-            time.sleep(5) # Wait before next check during boil
+            time.sleep(5)
             continue
 
         # 3. Get Data

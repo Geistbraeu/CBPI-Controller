@@ -23,18 +23,14 @@ class CBPIService:
     def get_kettle(self, name):
         return self.kettles.get(name)
 
-    def get_active_step(self):
-        """Fetch the active brew step."""
+    def get_all_steps(self):
+        """Fetch all brew steps."""
         try:
             resp = requests.get(f"{self.base_url}/step2/", timeout=2)
             if resp.status_code == 200:
-                steps = resp.json()
-                # Find step with status "A"
-                for step in steps:
-                    if step.get('status') == 'A':
-                        return step
-            return None
+                return resp.json()
+            return []
         except Exception as e:
-            logging.error(f"Error fetching active step: {e}")
-            return None
+            logging.error(f"Error fetching steps: {e}")
+            return []
 
