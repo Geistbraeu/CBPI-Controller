@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "id": "FYyZ85ybZRPvVGxSfu2gou",
+      "name": "HLT",
+      "state": true,
+      "target_temp": 85,
+      "heater": "HzBrSAMFzZLXCKq7ktyFBE",
+      "agitator": "",
+      "sensor": "kbKonXanTdZqTFe8mUZWGS",
+      "type": "Hysteresis",
+      "props": {
+        "OffsetOff": "0.5",
+        "OffsetOn": "0.7"
+      }
+    },
+    {
+      "id": "6EZgcJbNnSYfTBr3GanhHV",
+      "name": "MT",
+      "state": true,
+      "target_temp": 63,
+      "heater": "RaedMgRL6XvJkh2LyuDrn5",
+      "agitator": "",
+      "sensor": "M8PUKMU9a2hxAjXk9vZHGW",
+      "type": "Hysteresis",
+      "props": {
+        "OffsetOff": "0.5",
+        "OffsetOn": "0.7"
+      }
+    }
+  ],
+  "types": {
+    "Hysteresis": {
+      "name": "Hysteresis",
+      "properties": [
+        {
+          "label": "OffsetOn",
+          "type": "number",
+          "configurable": true,
+          "description": "Offset below target temp when heater should switched on",
+          "default_value": null
+        },
+        {
+          "label": "OffsetOff",
+          "type": "number",
+          "configurable": true,
+          "description": "Offset below target temp when heater should switched off",
+          "default_value": null
+        }
+      ],
+      "actions": []
+    }
+  }
+}

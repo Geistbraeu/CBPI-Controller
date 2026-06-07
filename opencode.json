@@ -1,0 +1,25 @@
+{
+  "$schema": "https://opencode.ai",
+  "theme": "opencode",
+  "model": "google/gemini-1.5-flash",
+  "mcp": {
+    "web-fetch": {
+      "type": "local",
+      "command": [
+        "C:\\Users\\GhostDemon\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "mcp_server_fetch"
+      ],
+      "enabled": true
+    },
+    "python-analyzer": {
+      "type": "local",
+      "command": [
+        "C:\\Users\\GhostDemon\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "mcp_server_analyzer"
+      ],
+      "enabled": true
+    }
+  }
+}

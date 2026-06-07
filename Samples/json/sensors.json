@@ -1,0 +1,418 @@
+{
+  "data": [
+    {
+      "id": "kbKonXanTdZqTFe8mUZWGS",
+      "name": "HLT Temp",
+      "type": "OneWire",
+      "props": {
+        "Interval": 1,
+        "Sensor": "28-000000bc5fa5"
+      },
+      "state": false
+    },
+    {
+      "id": "a8YDegLNbHSbz2CgfP5Kv8",
+      "name": "HLT Temp Pt100",
+      "type": "PT100X_Sensor",
+      "props": {
+        "Interval": 1,
+        "Kettle": "FYyZ85ybZRPvVGxSfu2gou",
+        "RefRest": 430,
+        "ResSens": 100,
+        "Wires": 3,
+        "csPin": 6,
+        "ignore_above": "110",
+        "ignore_below": "0"
+      },
+      "state": false
+    },
+    {
+      "id": "M8PUKMU9a2hxAjXk9vZHGW",
+      "name": "MT Temp",
+      "type": "OneWire",
+      "props": {
+        "Interval": 1,
+        "Sensor": "28-000000bd0122"
+      },
+      "state": false
+    },
+    {
+      "id": "MjirdhbTQNi7DX9MTFqVJF",
+      "name": "MT Temp Pt100",
+      "type": "PT100X_Sensor",
+      "props": {
+        "Interval": 1,
+        "RefRest": 430,
+        "ResSens": 100,
+        "Wires": 3,
+        "csPin": 5,
+        "ignore_above": "120",
+        "ignore_below": "0"
+      },
+      "state": false
+    }
+  ],
+  "types": {
+    "CustomSensor": {
+      "name": "CustomSensor",
+      "properties": [],
+      "actions": []
+    },
+    "DummyPressure": {
+      "name": "DummyPressure",
+      "properties": [
+        {
+          "label": "Pressure",
+          "type": "number",
+          "configurable": true,
+          "description": "Start Pressure",
+          "default_value": null
+        },
+        {
+          "label": "PressureIncrease",
+          "type": "number",
+          "configurable": true,
+          "description": "Pressure increase per hour",
+          "default_value": null
+        },
+        {
+          "label": "PressureDecrease",
+          "type": "number",
+          "configurable": true,
+          "description": "Pressure decrease per second on openm valve",
+          "default_value": null
+        },
+        {
+          "label": "Fermenter",
+          "type": "fermenter",
+          "configurable": true,
+          "description": "Fermenter"
+        }
+      ],
+      "actions": []
+    },
+    "HTTPSensor": {
+      "name": "HTTPSensor",
+      "properties": [
+        {
+          "label": "Key",
+          "type": "text",
+          "configurable": true,
+          "default_value": "",
+          "description": "Http Key"
+        },
+        {
+          "label": "Timeout",
+          "type": "number",
+          "configurable": "True",
+          "description": "Timeout in seconds to send notification (default:60 | deactivated: 0)",
+          "default_value": null
+        },
+        {
+          "label": "Kettle",
+          "type": "kettle",
+          "configurable": true,
+          "description": "Reduced logging if Kettle is inactive / range warning in dashboard (only Kettle or Fermenter to be selected)"
+        },
+        {
+          "label": "Fermenter",
+          "type": "fermenter",
+          "configurable": true,
+          "description": "Reduced logging in seconds if Fermenter is inactive / range warning in dashboard (only Kettle or Fermenter to be selected)"
+        },
+        {
+          "label": "ReducedLogging",
+          "type": "number",
+          "configurable": true,
+          "description": "Reduced logging frequency in seconds if selected Kettle or Fermenter is inactive (default: 60 sec | disabled: 0)",
+          "default_value": null
+        },
+        {
+          "label": "TempRange",
+          "type": "number",
+          "configurable": true,
+          "description": "Temp range in degree between reading and target temp of fermenter/kettle. Larger difference shows different color in dashboard (default:0 | deactivated: 0)",
+          "default_value": null
+        }
+      ],
+      "actions": []
+    },
+    "OneWire": {
+      "name": "OneWire",
+      "properties": [
+        {
+          "label": "Sensor",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            "28-000000bd0122",
+            "28-000000bc5fa5"
+          ],
+          "description": ""
+        },
+        {
+          "label": "offset",
+          "type": "number",
+          "configurable": true,
+          "description": "Sensor Offset (Default is 0)",
+          "default_value": 0
+        },
+        {
+          "label": "Interval",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            1,
+            5,
+            10,
+            30,
+            60
+          ],
+          "description": "Interval in Seconds"
+        },
+        {
+          "label": "Kettle",
+          "type": "kettle",
+          "configurable": true,
+          "description": "Reduced logging if Kettle is inactive / range warning in dashboard(only Kettle or Fermenter to be selected)"
+        },
+        {
+          "label": "Fermenter",
+          "type": "fermenter",
+          "configurable": true,
+          "description": "Reduced logging in seconds if Fermenter is inactive / range warning in dashboard (only Kettle or Fermenter to be selected)"
+        },
+        {
+          "label": "ReducedLogging",
+          "type": "number",
+          "configurable": true,
+          "description": "Reduced logging frequency in seconds if selected Kettle or Fermenter is inactive (default: 60 sec | disabled: 0)",
+          "default_value": 60
+        },
+        {
+          "label": "TempRange",
+          "type": "number",
+          "configurable": true,
+          "description": "Temp range in degree between reading and target temp of fermenter/kettle. Larger difference shows different color in dashboard (default:0 | deactivated: 0)",
+          "default_value": 0
+        }
+      ],
+      "actions": []
+    },
+    "AlarmTimer": {
+      "name": "AlarmTimer",
+      "properties": [],
+      "actions": [
+        {
+          "method": "set",
+          "label": "Set Timer",
+          "parameters": [
+            {
+              "label": "time",
+              "type": "number",
+              "configurable": true,
+              "description": "Time in Minutes",
+              "default_value": null
+            }
+          ]
+        },
+        {
+          "method": "start",
+          "label": "Start Timer",
+          "parameters": []
+        },
+        {
+          "method": "stop",
+          "label": "Stop Timer",
+          "parameters": []
+        },
+        {
+          "method": "Reset",
+          "label": "Reset Timer",
+          "parameters": []
+        }
+      ]
+    },
+    "KettleSensor": {
+      "name": "KettleSensor",
+      "properties": [
+        {
+          "label": "Kettle",
+          "type": "kettle",
+          "configurable": true,
+          "description": ""
+        },
+        {
+          "label": "Data",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            "TargetTemp",
+            "Power"
+          ],
+          "description": "Select kettle data to be monitored"
+        }
+      ],
+      "actions": []
+    },
+    "FermenterSensor": {
+      "name": "FermenterSensor",
+      "properties": [
+        {
+          "label": "Fermenter",
+          "type": "fermenter",
+          "configurable": true,
+          "description": ""
+        },
+        {
+          "label": "Data",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            "TargetTemp",
+            "Power"
+          ],
+          "description": "Select kettle data to be monitored"
+        }
+      ],
+      "actions": []
+    },
+    "PT100X_Sensor": {
+      "name": "PT100X_Sensor",
+      "properties": [
+        {
+          "label": "csPin",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27
+          ],
+          "description": "GPIO Pin connected to the CS Pin of the MAX31865 - For MISO, MOSI, CLK no choice by default it's PIN 9, 10, 11"
+        },
+        {
+          "label": "ResSens",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            100,
+            1000
+          ],
+          "description": "Select 100 for PT100 or 1000 for PT1000"
+        },
+        {
+          "label": "RefRest",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            430,
+            4300
+          ],
+          "description": "Reference Resistor of the MAX31865 board (430 (PT100) or 4300 ohm (PT1000) depending on your board)"
+        },
+        {
+          "label": "offset",
+          "type": "number",
+          "configurable": true,
+          "description": "Offset for the PT Sensor (Default is 0)",
+          "default_value": 0
+        },
+        {
+          "label": "ignore_below",
+          "type": "number",
+          "configurable": true,
+          "description": "Readings below this value will be ignored",
+          "default_value": 0
+        },
+        {
+          "label": "ignore_above",
+          "type": "number",
+          "configurable": true,
+          "description": "Readings above this value will be ignored",
+          "default_value": 100
+        },
+        {
+          "label": "ignore_delta",
+          "type": "number",
+          "configurable": true,
+          "description": "Ignore reading if delta between two readings is above this value. Must be positive (0: inactive)",
+          "default_value": 1
+        },
+        {
+          "label": "alpha",
+          "type": "number",
+          "configurable": true,
+          "description": "Calculate Average between 2 values. Must be between 0 and 1. 1 deactivates averaging",
+          "default_value": 1
+        },
+        {
+          "label": "Wires",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            2,
+            3,
+            4
+          ],
+          "description": "Choose between 2, 3 or 4 wire PT100 / PT1000 connection"
+        },
+        {
+          "label": "Interval",
+          "type": "select",
+          "configurable": true,
+          "options": [
+            1,
+            5,
+            10,
+            30,
+            60
+          ],
+          "description": "Interval in Seconds"
+        },
+        {
+          "label": "Kettle",
+          "type": "kettle",
+          "configurable": true,
+          "description": "Reduced logging if Kettle is inactive (only Kettle or Fermenter to be selected)"
+        },
+        {
+          "label": "Fermenter",
+          "type": "fermenter",
+          "configurable": true,
+          "description": "Reduced logging in seconds if Fermenter is inactive (only Kettle or Fermenter to be selected)"
+        },
+        {
+          "label": "ReducedLogging",
+          "type": "number",
+          "configurable": true,
+          "description": "Reduced logging frequency in seconds if selected Kettle or Fermenter is inactive (default: 60 sec | disabled: 0)",
+          "default_value": null
+        }
+      ],
+      "actions": []
+    }
+  }
+}
