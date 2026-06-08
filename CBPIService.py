@@ -34,3 +34,16 @@ class CBPIService:
             logging.error(f"Error fetching steps: {e}")
             return []
 
+    def get_sensor_value(self, sensor_id):
+        """Fetch current value for a specific sensor."""
+        if not sensor_id:
+            return None
+        try:
+            resp = requests.get(f"{self.base_url}/sensor/{sensor_id}", timeout=2)
+            if resp.status_code == 200:
+                return resp.json().get('value')
+            return None
+        except Exception as e:
+            logging.error(f"Error fetching sensor {sensor_id}: {e}")
+            return None
+
